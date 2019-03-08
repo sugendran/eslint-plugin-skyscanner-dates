@@ -1,0 +1,80 @@
+clone:
+  clone:
+    image: 325714046698.dkr.ecr.eu-west-1.amazonaws.com/dmx/drone-git:next
+    pull: true
+
+default_node_setup: &node_lts_carbon_build
+  image: 325714046698.dkr.ecr.eu-west-1.amazonaws.com/skyscanner/node-lts-carbon-build:100.0.11
+  pull: true
+
+pipeline:
+  npm_auth:
+    image: 325714046698.dkr.ecr.eu-west-1.amazonaws.com/drone-plugins/drone-npm-auth-plugin:latest
+    registry: "artifactory.skyscannertools.net/artifactory/api/npm/npm/"
+    secrets:
+      - source: npm_access_token
+        target: token
+
+  set_dev_version:
+    <<: *node_lts_carbon_build
+    commands:
+      - PACKAGE_VERSION=$(node -p -e "require('./package.json').version")
+      - npm version $PACKAGE_VERSION-dev.${DRONE_BUILD_NUMBER} --no-git-tag-version
+    when:
+      branch:
+        exclude: master
+
+  install:
+    <<: *node_lts_carbon_build
+    commands:
+      - npm install
+
+  lint:
+    <<: *node_lts_carbon_build
+    group: checks
+    commands:
+      - npm run lint
+
+  test:
+    <<: *node_lts_carbon_build
+    group: checks
+    commands:
+      - npm run coverage
+
+  danger:
+    group: checks
+    image: 325714046698.dkr.ecr.eu-west-1.amazonaws.com/drone-plugins/danger-js:3.1.0
+    pull: true
+    when:
+      event: pull_request
+
+  sonarqube:
+    image: 325714046698.dkr.ecr.eu-west-1.amazonaws.com/sonarqube/drone-scanner:2
+    pull: true
+    parameters: "-Dsonar.projectVersion=1.0.${DRONE_BUILD_NUMBER}"
+
+  npm_publish:
+    image: plugins/npm
+    username: mshell
+    email: mshell@skyscanner.net
+    registry: 'https://artifactory.skyscannertools.net/artifactory/api/npm/npm/'
+    when:
+      event:
+        exclude: pull_request
+
+  increment_version:
+    image: 325714046698.dkr.ecr.eu-west-1.amazonaws.com/drone-plugins/increment-version
+    version_file: package.json
+    when:
+      branch: master
+      event:
+        exclude: pull_request
+
+# Uncomment this to enable notifications to a slack channel of your choice
+# slack:
+#    image: plugins/slack
+#    webhook: https://hooks.slack.com/services/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
+#    channel: "##dingo"
+#    username: drone
+#    when:
+#      status: [ failure ]

@@ -1,0 +1,66 @@
+{
+  "name": "eslint-plugin-skyscanner-dates",
+  "version": "0.0.1",
+  "description": "eslint plugin to handle safely dates",
+  "main": "src/index.js",
+  "engines": {
+    "node": "^8.12.0",
+    "npm": "^6.4.0"
+  },
+  "scripts": {
+    "lint:js": "eslint . --ignore-path .gitignore --ext .js,.jsx",
+    "lint:js:staged": "eslint . --ignore-path .gitignore",
+    "lint:js:fix": "npm run lint:js -- --fix",
+    "lint:js:fix:staged": "eslint . --ignore-path .gitignore --fix",
+    "lint": "ensure-node-env && npm run lint:js",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "precommit": "lint-staged",
+    "build-docs": "mkdir -p docs && jsdoc2md src/*.js > docs/api.md",
+    "generateNpmrc": "node npm-auth generateNpmrc"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": [
+      "npm run lint:js:staged --"
+    ]
+  },
+  "dependencies": {
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "ensure-node-env": "^1.0.8",
+    "eslint": "^4.9.0",
+    "babel-eslint": "^8.0.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-skyscanner": "^3.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^1.0.1",
+    "jest": "^23.6.0",
+    "jsdoc": "^3.4.3",
+    "jsdoc-to-markdown": "^4.0.1",
+    "lint-staged": "^7.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.skyscannertools.net:dingo/eslint-plugin-skyscanner-dates.git"
+  },
+  "publishConfig": {
+    "registry": "https://artifactory.skyscannertools.net/artifactory/api/npm/npm/"
+  },
+  "keywords": [
+    "mshell",
+    "library",
+    "node"
+  ],
+  "files": [
+    "src"
+  ],
+  "author": "Dingo",
+  "license": "UNLICENSED",
+  "bugs": {
+    "email": "DingoSquad@skyscanner.net"
+  },
+  "homepage": "https://github.skyscannertools.net/dingo/eslint-plugin-skyscanner-dates"
+}
