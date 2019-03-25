@@ -1,5 +1,7 @@
 # eslint-plugin-skyscanner-dates
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Skyscanner/eslint-plugin-skyscanner-dates.svg)](https://greenkeeper.io/)
+
 eslint plugin to handle safely dates.
 
 ## Features
