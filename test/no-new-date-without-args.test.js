@@ -1,5 +1,6 @@
-const { rules } = require('../src');
 const { RuleTester } = require('eslint');
+
+const { rules } = require('../src');
 
 const ruleTester = new RuleTester({
   parserOptions: {
