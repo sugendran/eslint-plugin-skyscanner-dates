@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-skyscanner-dates",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "eslint plugin to handle dates safely",
   "main": "src/index.js",
   "engines": {
