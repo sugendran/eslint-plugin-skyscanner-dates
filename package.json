@@ -1,11 +1,11 @@
 {
   "name": "eslint-plugin-skyscanner-dates",
-  "version": "0.0.1",
-  "description": "eslint plugin to handle safely dates",
+  "version": "1.0.7",
+  "description": "eslint plugin to handle dates safely",
   "main": "src/index.js",
   "engines": {
     "node": "^8.12.0",
-    "npm": "^6.4.0"
+    "npm": ">=5"
   },
   "scripts": {
     "lint:js": "eslint . --ignore-path .gitignore --ext .js,.jsx",
@@ -16,16 +16,12 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "precommit": "lint-staged",
-    "build-docs": "mkdir -p docs && jsdoc2md src/*.js > docs/api.md",
-    "generateNpmrc": "node npm-auth generateNpmrc"
+    "build-docs": "mkdir -p docs && jsdoc2md src/*.js > docs/api.md"
   },
   "lint-staged": {
     "**/*.{js,jsx}": [
       "npm run lint:js:staged --"
     ]
-  },
-  "dependencies": {
-    "winston": "^2.4.0"
   },
   "devDependencies": {
     "ensure-node-env": "^1.0.8",
@@ -42,25 +38,15 @@
     "jsdoc-to-markdown": "^4.0.1",
     "lint-staged": "^7.1.2"
   },
+  "peerDependencies": {
+    "eslint": "^3.0.0 || ^4.0.0 || ^5.0.0"
+  },
   "repository": {
     "type": "git",
-    "url": "git@github.skyscannertools.net:dingo/eslint-plugin-skyscanner-dates.git"
+    "url": "git@github.com:Skyscanner/eslint-plugin-skyscanner-dates.git"
   },
-  "publishConfig": {
-    "registry": "https://artifactory.skyscannertools.net/artifactory/api/npm/npm/"
-  },
-  "keywords": [
-    "mshell",
-    "library",
-    "node"
-  ],
+  "license": "Apache-2.0",
   "files": [
     "src"
-  ],
-  "author": "Dingo",
-  "license": "UNLICENSED",
-  "bugs": {
-    "email": "DingoSquad@skyscanner.net"
-  },
-  "homepage": "https://github.skyscannertools.net/dingo/eslint-plugin-skyscanner-dates"
+  ]
 }

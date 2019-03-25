@@ -1,16 +1,42 @@
-const { parse } = require('url');
-const winston = require('winston');
+const noDateFns = require('./rules/no-date-fns');
+const noMoment = require('./rules/no-moment');
+const noNewDateWithArgs = require('./rules/no-new-date-with-args');
+const noNewDateWithoutArgs = require('./rules/no-new-date-without-args');
 
-const logger = winston;
-
-/**
- * Parses url and returns the hostname. THIS FUNCTION IS JUST AN EXAMPLE, REPLACE IT WITH YOUR CODE.
- * @param {string} url - Full URL including protocol.
- * @returns {string} Hostname part of the URL.
- */
-function getHostname(url) {
-  logger.debug(`Parsing url ${url}`);
-  return parse(url).host;
-}
-
-module.exports = getHostname;
+module.exports = {
+  configs: {
+    error: {
+      plugins: ['skyscanner-dates'],
+      rules: {
+        'skyscanner-dates/no-date-fns': 'error',
+        'skyscanner-dates/no-moment': 'error',
+        'skyscanner-dates/no-new-date-with-args': 'error',
+        'skyscanner-dates/no-new-date-without-args': 'error',
+      },
+    },
+    recommended: {
+      plugins: ['skyscanner-dates'],
+      rules: {
+        'skyscanner-dates/no-date-fns': 'error',
+        'skyscanner-dates/no-moment': 'error',
+        'skyscanner-dates/no-new-date-with-args': 'error',
+        'skyscanner-dates/no-new-date-without-args': 'warn',
+      },
+    },
+    warn: {
+      plugins: ['skyscanner-dates'],
+      rules: {
+        'skyscanner-dates/no-date-fns': 'warn',
+        'skyscanner-dates/no-moment': 'warn',
+        'skyscanner-dates/no-new-date-with-args': 'warn',
+        'skyscanner-dates/no-new-date-without-args': 'warn',
+      },
+    },
+  },
+  rules: {
+    'no-date-fns': noDateFns,
+    'no-moment': noMoment,
+    'no-new-date-with-args': noNewDateWithArgs,
+    'no-new-date-without-args': noNewDateWithoutArgs,
+  },
+};

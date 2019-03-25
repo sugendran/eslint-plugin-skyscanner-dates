@@ -1,37 +1,58 @@
 # eslint-plugin-skyscanner-dates
 
-[![Build Status](https://drone-github.skyscannertools.net/api/badges/dingo/eslint-plugin-skyscanner-dates/status.svg)](https://drone-github.skyscannertools.net/dingo/eslint-plugin-skyscanner-dates)
-[![SonarQube Coverage](https://badges.prod.aws.skyscnr.com/badge?type=sonarqube_coverage&repo=dingo/eslint-plugin-skyscanner-dates)](https://sonarqube.skyscannertools.net/dashboard?id=dingo%3Aeslint-plugin-skyscanner-dates)
-[![Node Version Supported](https://badges.prod.aws.skyscnr.com/badge?type=static&text=node&value=lts-carbon&colour=%2344CC11)]()
-[![Slack Channel](https://badges.prod.aws.skyscnr.com/badge?type=slack&channel=#dingo)](https://skyscanner.slack.com/messages/#dingo/)
-[![Powered by MShell](https://badges.prod.aws.skyscnr.com/badge?type=static&text=powered%20by&value=mshell&colour=%2300B2D6)](https://confluence.skyscannertools.net/x/6gAY)
-
 eslint plugin to handle safely dates.
 
 ## Features
 
-TODO
-
-### Danger JS
-
-This project includes Danger JS checks, so remember to follow the steps defined in this guide to enable using Danger JS with Drone:
-
-- https://github.skyscannertools.net/danger/danger-js
+This eslint plugin is meant to be used to avoid explicit usage/manupulation of date in JS, so to avoid issues with timezones.
 
 ## Installation
 
 ```bash
-npm install --registry https://artifactory.skyscannertools.net/artifactory/api/npm/npm/ eslint-plugin-skyscanner-dates
+npm install --save-dev eslint-plugin-skyscanner-dates
 ```
 
 ## Usage
 
-TODO
+Add to the `.eslintrc.json` file inside the root folder of a linted project:
 
-### Logging
+All the rules will raise an error except `skyscanner-dates/no-new-date-without-args` which will be just a warning.
+```
+{
+  "extends": "plugin:skyscanner-dates/recommended",
+  "plugins": ["skyscanner-dates"]
+}
+```
 
-This library uses [winston](https://github.com/winstonjs/winston) logging framework to emit logs.
-It is recommended to configure [winston-grappler transport](https://gitlab.skyscannertools.net/data-management-services/winston-grappler/) to forward logs to Grappler.
+Any rule failing will raise a blocking error.
+```
+{
+  "extends": "plugin:skyscanner-dates/error",
+  "plugins": ["skyscanner-dates"]
+}
+```
+
+Any rule failing will just raise a warning.
+```
+{
+  "extends": "plugin:skyscanner-dates/warn",
+  "plugins": ["skyscanner-dates"]
+}
+```
+
+
+Each rule can bbe configured on its own following `eslint` conventions:
+```
+{
+  "plugins": ["skyscanner-dates"],
+  "rules": {
+    "skyscanner-dates/no-date-fns": "warn",
+    "skyscanner-dates/no-moment": "warn",
+    "skyscanner-dates/no-new-date-with-args": "warn",
+    "skyscanner-dates/no-new-date-without-args": "warn"
+  }
+}
+```
 
 ## API
 
@@ -56,5 +77,3 @@ API docs will now be generated in `docs/api.md`.
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) if you want to contribute.
-Slack channel: #dingo
-Email: DingoSquad@skyscanner.net
