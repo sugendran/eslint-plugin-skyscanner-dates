@@ -17,9 +17,9 @@ ruleTester.run('no-moment', rules['no-moment'], {
   }],
   invalid: [{
     code: 'const moment = require("moment");',
-    errors: [{ message: 'Deprecated require of moment package, use saddlebag-date package instead, for more info: https://github.skyscannertools.net/dingo/eslint-plugin-skyscanner-dates' }],
+    errors: [{ message: 'Deprecated require of moment package, use saddlebag-date package instead.' }],
   }, {
     code: 'import moment from "moment";',
-    errors: [{ message: 'Deprecated import of moment package, use saddlebag-date package instead, for more info: https://github.skyscannertools.net/dingo/eslint-plugin-skyscanner-dates' }],
+    errors: [{ message: 'Deprecated import of moment package, use saddlebag-date package instead.' }],
   }],
 });

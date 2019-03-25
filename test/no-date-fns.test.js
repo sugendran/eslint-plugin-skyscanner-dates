@@ -17,9 +17,9 @@ ruleTester.run('no-date-fns', rules['no-date-fns'], {
   }],
   invalid: [{
     code: 'const dateFns = require("date-fns");',
-    errors: [{ message: 'Deprecated require of date-fns package, use saddlebag-date package instead, for more info: https://github.skyscannertools.net/dingo/eslint-plugin-skyscanner-dates' }],
+    errors: [{ message: 'Deprecated require of date-fns package, use saddlebag-date package instead.' }],
   }, {
     code: 'import dateFns from "date-fns";',
-    errors: [{ message: 'Deprecated import of date-fns package, use saddlebag-date package instead, for more info: https://github.skyscannertools.net/dingo/eslint-plugin-skyscanner-dates' }],
+    errors: [{ message: 'Deprecated import of date-fns package, use saddlebag-date package instead.' }],
   }],
 });

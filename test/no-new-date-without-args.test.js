@@ -20,6 +20,6 @@ ruleTester.run('no-new-date-without-args', rules['no-new-date-without-args'], {
   }],
   invalid: [{
     code: 'const date = new Date()',
-    errors: [{ message: 'Deprecated new Date() expression, use saddlebag-date package instead, for more info: https://github.skyscannertools.net/dingo/eslint-plugin-skyscanner-dates' }],
+    errors: [{ message: 'Deprecated new Date() expression, use saddlebag-date package instead.' }],
   }],
 });
