@@ -1,5 +1,6 @@
 # eslint-plugin-skyscanner-dates
 
+[![Build Status](https://travis-ci.org/Skyscanner/eslint-plugin-skyscanner-dates.svg?branch=master)](https://travis-ci.org/Skyscanner/eslint-plugin-skyscanner-dates)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Skyscanner/eslint-plugin-skyscanner-dates.svg)](https://greenkeeper.io/)
 
 eslint plugin to handle safely dates.
